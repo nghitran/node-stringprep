@@ -242,10 +242,13 @@ Handle<Value> ToUnicode(const Arguments& args)
 
 /*** Initialization ***/
 
-extern "C" void init(Handle<Object> target)
-{
-  HandleScope scope;
-  StringPrep::Initialize(target);
-  NODE_SET_METHOD(target, "toUnicode", ToUnicode);
+extern "C" {
+    static void init(Handle<Object> target)
+    {
+      HandleScope scope;
+      StringPrep::Initialize(target);
+      NODE_SET_METHOD(target, "toUnicode", ToUnicode);
+    }
+    NODE_MODULE(node_stringprep, init);
 }
 
